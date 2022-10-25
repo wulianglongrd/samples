@@ -68,34 +68,22 @@ func istioMd5Key(key ConfigKey) uint64 {
 }
 
 func anotherMd5Key(key ConfigKey) uint64 {
-	var builder strings.Builder
-	k := string(key.Kind)
-	l := len(k) + len(key.Name) + len(key.Namespace)
-
-	builder.Grow(l)
-	builder.WriteString(k)
-	builder.WriteString(key.Name)
-	builder.WriteString(key.Namespace)
-
+	s := configToString(key)
 	hash := md5.New()
-	sum := hash.Sum([]byte(builder.String()))
+	sum := hash.Sum([]byte(s))
 	return binary.BigEndian.Uint64(sum)
 }
 
 func hashKey(key ConfigKey) uint64 {
-	var builder strings.Builder
-	k := string(key.Kind)
-	l := len(k) + len(key.Name) + len(key.Namespace)
-
-	builder.Grow(l)
-	builder.WriteString(k)
-	builder.WriteString(key.Name)
-	builder.WriteString(key.Namespace)
-
-	return xxhash.Sum64([]byte(builder.String()))
+	s := configToString(key)
+	return xxhash.Sum64([]byte(s))
 }
 
 func stringKey(key ConfigKey) string {
+	return configToString(key)
+}
+
+func configToString(key ConfigKey) string {
 	var builder strings.Builder
 	k := string(key.Kind)
 	l := len(k) + len(key.Name) + len(key.Namespace)
