@@ -5,27 +5,52 @@ import (
 	"testing"
 )
 
-func Benchmark100Md5KeyFind(b *testing.B) {
-	benchmarkMd5KeyFind(b, 100)
+// istio current used md5 key
+func Benchmark100IstioMd5KeyFind(b *testing.B) {
+	benchmarkIstioMd5KeyFind(b, 100)
 }
-func Benchmark1000Md5KeyFind(b *testing.B) {
-	benchmarkMd5KeyFind(b, 1000)
+func Benchmark1000IstioMd5KeyFind(b *testing.B) {
+	benchmarkIstioMd5KeyFind(b, 1000)
 }
-func Benchmark10000Md5KeyFind(b *testing.B) {
-	benchmarkMd5KeyFind(b, 10000)
+func Benchmark10000IstioMd5KeyFind(b *testing.B) {
+	benchmarkIstioMd5KeyFind(b, 10000)
 }
-func Benchmark100000Md5KeyFind(b *testing.B) {
-	benchmarkMd5KeyFind(b, 100000)
+func Benchmark100000IstioMd5KeyFind(b *testing.B) {
+	benchmarkIstioMd5KeyFind(b, 100000)
 }
-func Benchmark200000Md5KeyFind(b *testing.B) {
-	benchmarkMd5KeyFind(b, 200000)
+func Benchmark200000IstioMd5KeyFind(b *testing.B) {
+	benchmarkIstioMd5KeyFind(b, 200000)
 }
-func benchmarkMd5KeyFind(b *testing.B, max int) {
+func benchmarkIstioMd5KeyFind(b *testing.B, max int) {
 	samples := buildTestSamples(max)
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		Md5KeyFind(samples)
+		IstioMd5KeyFind(samples)
+	}
+}
+
+func Benchmark100AnotherMd5KeyFind(b *testing.B) {
+	benchmarkAnotherMd5KeyFind(b, 100)
+}
+func Benchmark1000AnotherMd5KeyFind(b *testing.B) {
+	benchmarkAnotherMd5KeyFind(b, 1000)
+}
+func Benchmark10000AnotherMd5KeyFind(b *testing.B) {
+	benchmarkAnotherMd5KeyFind(b, 10000)
+}
+func Benchmark100000AnotherMd5KeyFind(b *testing.B) {
+	benchmarkAnotherMd5KeyFind(b, 100000)
+}
+func Benchmark200000AnotherMd5KeyFind(b *testing.B) {
+	benchmarkAnotherMd5KeyFind(b, 200000)
+}
+func benchmarkAnotherMd5KeyFind(b *testing.B, max int) {
+	samples := buildTestSamples(max)
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		AnotherMd5KeyFind(samples)
 	}
 }
 

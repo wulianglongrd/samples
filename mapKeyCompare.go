@@ -13,18 +13,32 @@ type ConfigKey struct {
 	Namespace string
 }
 
-func Md5KeyFind(samples []ConfigKey) {
-	m := map[uint64]struct{}{}
+func IstioMd5KeyFind(samples []ConfigKey) {
+	m := make(map[uint64]struct{}, len(samples))
+
+	// this is simulate model.initSidecarScopes in push_context.go
 	for _, v := range samples {
-		m[md5Key(v)] = struct{}{}
+		m[istioMd5Key(v)] = struct{}{}
+	}
+
+	// this is simulate model.DependsOnConfig() in sidecar.go
+	for _, v := range samples {
+		_ = m[istioMd5Key(v)]
+	}
+}
+
+func AnotherMd5KeyFind(samples []ConfigKey) {
+	m := make(map[uint64]struct{}, len(samples))
+	for _, v := range samples {
+		m[anotherMd5Key(v)] = struct{}{}
 	}
 	for _, v := range samples {
-		_ = m[md5Key(v)]
+		_ = m[anotherMd5Key(v)]
 	}
 }
 
 func HashKeyFind(samples []ConfigKey) {
-	m := map[uint64]struct{}{}
+	m := make(map[uint64]struct{}, len(samples))
 	for _, v := range samples {
 		m[hashKey(v)] = struct{}{}
 	}
@@ -34,7 +48,7 @@ func HashKeyFind(samples []ConfigKey) {
 }
 
 func StringKeyFind(samples []ConfigKey) {
-	m := map[string]struct{}{}
+	m := make(map[string]struct{}, len(samples))
 	for _, v := range samples {
 		m[stringKey(v)] = struct{}{}
 	}
@@ -44,12 +58,27 @@ func StringKeyFind(samples []ConfigKey) {
 	}
 }
 
-func md5Key(key ConfigKey) uint64 {
+func istioMd5Key(key ConfigKey) uint64 {
 	hash := md5.New()
 	hash.Write([]byte{key.Kind})
 	hash.Write([]byte(key.Name))
 	hash.Write([]byte(key.Namespace))
 	sum := hash.Sum(nil)
+	return binary.BigEndian.Uint64(sum)
+}
+
+func anotherMd5Key(key ConfigKey) uint64 {
+	var builder strings.Builder
+	k := string(key.Kind)
+	l := len(k) + len(key.Name) + len(key.Namespace)
+
+	builder.Grow(l)
+	builder.WriteString(k)
+	builder.WriteString(key.Name)
+	builder.WriteString(key.Namespace)
+
+	hash := md5.New()
+	sum := hash.Sum([]byte(builder.String()))
 	return binary.BigEndian.Uint64(sum)
 }
 

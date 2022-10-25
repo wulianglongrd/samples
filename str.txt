@@ -1,0 +1,31 @@
+goos: darwin
+goarch: amd64
+pkg: github.com/wulianglongrd/samples
+cpu: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz
+Benchmark100-4      	   10000	    127731 ns/op	   47200 B/op	     402 allocs/op
+Benchmark100-4      	   10000	    133808 ns/op	   47200 B/op	     402 allocs/op
+Benchmark100-4      	   10000	    100421 ns/op	   47200 B/op	     402 allocs/op
+Benchmark100-4      	   10000	    100557 ns/op	   47200 B/op	     402 allocs/op
+Benchmark100-4      	   10000	    118766 ns/op	   47200 B/op	     402 allocs/op
+Benchmark1000-4     	    1222	   1273274 ns/op	  499946 B/op	    4002 allocs/op
+Benchmark1000-4     	    1431	    943466 ns/op	  499945 B/op	    4002 allocs/op
+Benchmark1000-4     	    1440	    998419 ns/op	  499946 B/op	    4002 allocs/op
+Benchmark1000-4     	    1057	    965230 ns/op	  499945 B/op	    4002 allocs/op
+Benchmark1000-4     	    2410	    419442 ns/op	  499946 B/op	    4002 allocs/op
+Benchmark10000-4    	     236	   5295671 ns/op	 4810822 B/op	   40002 allocs/op
+Benchmark10000-4    	     232	   5284194 ns/op	 4810820 B/op	   40002 allocs/op
+Benchmark10000-4    	     264	   5037819 ns/op	 4810824 B/op	   40002 allocs/op
+Benchmark10000-4    	     219	   6078678 ns/op	 4810822 B/op	   40002 allocs/op
+Benchmark10000-4    	     150	   8875113 ns/op	 4810823 B/op	   40002 allocs/op
+Benchmark100000-4   	      14	 139068054 ns/op	46813538 B/op	  400002 allocs/op
+Benchmark100000-4   	      16	  74248309 ns/op	46813532 B/op	  400002 allocs/op
+Benchmark100000-4   	      13	  77477955 ns/op	46813535 B/op	  400002 allocs/op
+Benchmark100000-4   	      18	  57631997 ns/op	46813534 B/op	  400002 allocs/op
+Benchmark100000-4   	      19	  67597454 ns/op	46813537 B/op	  400002 allocs/op
+Benchmark200000-4   	       7	 245665187 ns/op	93627043 B/op	  800002 allocs/op
+Benchmark200000-4   	       7	 192980677 ns/op	93627040 B/op	  800002 allocs/op
+Benchmark200000-4   	       6	 176065800 ns/op	93627050 B/op	  800002 allocs/op
+Benchmark200000-4   	       9	 115275282 ns/op	93627040 B/op	  800002 allocs/op
+Benchmark200000-4   	       9	 113042916 ns/op	93627042 B/op	  800002 allocs/op
+PASS
+ok  	github.com/wulianglongrd/samples	73.514s
